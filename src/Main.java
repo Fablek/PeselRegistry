@@ -154,7 +154,7 @@ public class Main {
         return null;
     }
 
-    private static int getDaysInMonth(int month, int year) {
+    private static Integer getDaysInMonth(int month, int year) {
         switch (month) {
             case 1:  // January
             case 3:  // March
@@ -180,6 +180,34 @@ public class Main {
         }
     }
 
+    private static String getGender(Scanner scanner) {
+        boolean retry;
+
+        do {
+            System.out.print("Podaj płeć: wciśnij k jeśli jesteś kobietą albo m jeśli jesteś mężczyzną: ");
+            retry = false;
+
+            String genderInput = scanner.next().toLowerCase();
+
+            if (genderInput.equals("k") || genderInput.equals("m")) {
+                return genderInput;
+            } else {
+                System.out.println("Podałeś niepoprawną formę płci.");
+
+                System.out.print("Wciśnij 'p' jeśli chcesz podać ponownie płeć lub wciśnij inny klawisz jeśli chcesz zakończyć: ");
+                String choice = scanner.next();
+
+                if (choice.equalsIgnoreCase("p")) {
+                    retry = true;
+                }
+            }
+
+        } while (retry);
+
+        System.out.println("Zakończono wprowadzanie płci.");
+        return null;
+    }
+
     public static void main(String[] args) {
         System.out.println("Zadanie 1 - Pesel");
 
@@ -188,6 +216,7 @@ public class Main {
         int year = getYear(scanner);
         int month = getMonth(scanner);
         int day = getDayOfMonth(scanner, month, year);
+        String gender = getGender(scanner);
     }
 
 }
