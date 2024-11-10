@@ -116,13 +116,78 @@ public class Main {
         }
     }
 
+    private static Integer getDayOfMonth(Scanner scanner, int month, int year) {
+        boolean retry;
+        int maxDays = getDaysInMonth(month, year);
+
+        do {
+            System.out.print("Podaj numer dnia miesiąca urodzenia, np. 23: ");
+            retry = false;
+
+            try {
+                int day = scanner.nextInt();
+
+                if (day < 1 || day > maxDays) {
+                    throw new IllegalArgumentException("Błąd: Podano nieprawidłowy numer dnia. " +  "Miesiąc " + month + " ma maksymalnie " + maxDays + " dni.");
+                }
+
+                return day;
+
+            } catch (InputMismatchException e) {
+                scanner.next(); // Clear invalid input
+                System.out.println("Błąd: Wprowadź liczbę całkowitą.");
+
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+
+            System.out.print("Podałeś zły numer, wciśnij 'p' jeśli chcesz podać ponownie numer dnia lub wciśnij inny klawisz jeśli chcesz zakończyć: ");
+            String choice = scanner.next();
+
+            if (choice.equalsIgnoreCase("p")) {
+                retry = true;
+            }
+
+        } while (retry);
+
+        System.out.println("Zakończono wprowadzanie dnia miesiąca.");
+        return null;
+    }
+
+    private static int getDaysInMonth(int month, int year) {
+        switch (month) {
+            case 1:  // January
+            case 3:  // March
+            case 5:  // May
+            case 7:  // July
+            case 8:  // August
+            case 10: // October
+            case 12: // December
+                return 31;
+            case 4:  // April
+            case 6:  // June
+            case 9:  // September
+            case 11: // November
+                return 30;
+            case 2:  // February
+                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                    return 29;
+                } else {
+                    return 28;
+                }
+            default:
+                throw new IllegalArgumentException("Nieprawidłowy miesiąc.");
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Zadanie 1 - Pesel");
 
         Scanner scanner = new Scanner(System.in);
 
-        getYear(scanner);
-        getMonth(scanner);
+        int year = getYear(scanner);
+        int month = getMonth(scanner);
+        int day = getDayOfMonth(scanner, month, year);
     }
 
 }
