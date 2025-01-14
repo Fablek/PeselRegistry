@@ -28,7 +28,7 @@ public class DateInput {
                 return dateOfBirth;
 
             } catch (InputMismatchException e) {
-                scanner.next(); // Clear invalid input
+                scanner.next();
                 System.out.println("Błąd: Wprowadź liczbę całkowitą.");
 
             } catch (IllegalArgumentException e) {
