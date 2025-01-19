@@ -39,7 +39,7 @@ public class Main {
             String confirmEntry = scanner.next();
             if (!confirmEntry.equalsIgnoreCase("t")) break;
 
-            String pesel = PeselGenerator.generatePesel(year, month, day, gender, 0);
+            String pesel = PeselGenerator.generatePesel(year, month, day, gender);
             PeselGenerator.savePesel(pesel);
 
             System.out.println("Czy chcesz dokonać kolejnego wpisu? Klawisz t – tak, pozostałe – nie.");

@@ -26,7 +26,6 @@ public class GenderInput {
 
         } while (retry);
 
-        System.out.println("Zakończono wprowadzanie płci.");
         return null;
     }
 }
